@@ -77,13 +77,13 @@ char	**ft_split(char const *s, char c)
 {
 	char	**newtab;
 	int		words;
+
 	if (!s)
 		return (NULL);
 	words = count_word(s, c);
 	newtab = malloc((words + 1) * sizeof(char *));
 	if (!newtab)
 		return (NULL);
-	
 	if (!fill_words(newtab, s, c))
 	{
 		free_split(newtab);
