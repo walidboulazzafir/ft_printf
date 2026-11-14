@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:39:38 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/14 08:55:18 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/14 09:04:52 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	ft_print_nbr(va_list args, int *count);
 void	ft_print_unsigned(va_list args, int *count);
 void	ft_print_hex(va_list args, int *count, char format);
 void	ft_print_pointer(va_list args, int *count);
-void	print_hex_digits(unsigned int nb, char *hex, int *count);
+void	print_hex_digits(uintptr_t nb, char *hex, int *count);
 
 #endif
