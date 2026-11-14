@@ -6,89 +6,53 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 21:49:06 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/12 21:49:07 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/14 08:59:31 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
-int	len_nbr(int n)
+void	handle_formate(va_list args, char format, int *count)
 {
-	int		len;
-	long	nb;
-
-	nb = n;
-	len = 0;
-	if (nb <= 0)
-	{
-		len++;
-		nb *= -1;
-	}
-	while (nb > 0)
-	{
-		len++;
-		nb /= 10;
-	}
-	return (len);
+	if (format == 'c' || format == '%')
+		ft_print_char(args, count, format);
+	else if (format == 's')
+		ft_print_str(args, count);
+	else if (format == 'd' || format == 'i')
+		ft_print_nbr(args, count);
+	else if (format == 'u')
+		ft_print_unsigned(args, count);
+	else if (format == 'x' || format == 'X')
+		ft_print_hex(args, count, format);
+	else if (format == 'p')
+		ft_print_pointer(args, count);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	va_list		list;
-	int			i;
-	char		*current;
-	int			nbr;
-	int			count;
+	va_list	args;
+	int		count;
+	int		i;
 
-	i = 0;
+	if (!format)
+		return (-1);
+	va_start(args, format);
 	count = 0;
-	va_start(list, format);
+	i = 0;
 	while (format[i])
 	{
-		while (format[i] && format[i] != '%')
+		if (format[i] == '%' && format[i + 1])
 		{
-			ft_putchar_fd(format[i], 1);
-			count++;
-			i++;
-		}
-		if (format[i] == '\0')
-			break ;
-		if (format[i + 1] == 'd' || format[i + 1] == 'i')
-		{
-			nbr = va_arg(list, int);
-			ft_putnbr_fd(nbr, 1);
-			count += len_nbr(nbr);
-			i += 2;
-		}
-		else if (format[i + 1] == 'c')
-		{
-			ft_putchar_fd(va_arg(list, int), 1);
-			count++;
-			i += 2;
-		}
-		else if (format[i + 1] == 's')
-		{
-			current = va_arg(list, char *);
-			if (current == NULL)
-				current = "(null)";
-			ft_putstr_fd(current, 1);
-			count += ft_strlen(current);
-			i += 2;
-		}
-		else if (format[i + 1] == '%')
-		{
-			ft_putchar_fd('%', 1);
-			count++;
+			handle_formate(args, format[i + 1], &count);
 			i += 2;
 		}
 		else
 		{
-			ft_putchar_fd(format[i], 1);
-			count++;
+			write(1, &format[i], 1);
 			i++;
+			count++;
 		}
 	}
-	va_end(list);
+	va_end(args);
 	return (count);
 }

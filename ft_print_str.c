@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 14:31:39 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/09 16:15:03 by wboulazz         ###   ########.fr       */
+/*   Created: 2026/11/14 06:53:57 by wboulazz          #+#    #+#             */
+/*   Updated: 2026/11/14 08:59:27 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	ft_print_str(va_list args, int *count)
 {
-	size_t			i;
-	unsigned char	*str;
+	int		i;
+	char	*content;
 
+	content = va_arg(args, char *);
+	if (!content)
+		content = "(null)";
 	i = 0;
-	str = (unsigned char *)s;
-	while (i < n)
+	while (content[i])
 	{
-		str[i] = (unsigned char)c;
+		write(1, &content[i], 1);
 		i++;
 	}
-	return (s);
+	(*count) += i;
 }

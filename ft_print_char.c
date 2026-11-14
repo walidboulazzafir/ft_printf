@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 16:10:20 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/07 10:38:45 by wboulazz         ###   ########.fr       */
+/*   Created: 2026/11/14 06:29:20 by wboulazz          #+#    #+#             */
+/*   Updated: 2026/11/14 08:59:13 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+void	ft_print_char(va_list args, int *count, char format)
 {
-	size_t	i;
-	size_t	srclen;
+	char	c;
 
-	i = 0;
-	srclen = ft_strlen(src);
-	if (size == 0)
-		return (srclen);
-	while (i < size - 1 && src[i] != '\0')
+	if (format == 'c')
 	{
-		dst[i] = src[i];
-		i++;
+		c = va_arg(args, int);
+		write(1, &c, 1);
 	}
-	dst[i] = '\0';
-	return (srclen);
+	else
+		write(1, "%", 1);
+	(*count)++;
 }

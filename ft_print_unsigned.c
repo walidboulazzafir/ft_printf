@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/21 07:28:29 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/07 10:38:51 by wboulazz         ###   ########.fr       */
+/*   Created: 2026/11/14 07:22:33 by wboulazz          #+#    #+#             */
+/*   Updated: 2026/11/14 08:59:29 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_print_unsigned(va_list args, int *count)
 {
-	unsigned int	i;
-	char			*newstr;
-	char			newchr;
-	size_t			len;
+	unsigned int	nb;
+	unsigned int	div;
+	char			digit;
 
-	if (!s || !f)
-		return (NULL);
-	len = ft_strlen(s);
-	i = 0;
-	newstr = malloc(len + 1);
-	if (!newstr)
-		return (NULL);
-	while (s[i])
+	nb = va_arg(args, unsigned int);
+	div = 1;
+	while (nb / div >= 10)
+		div *= 10;
+	while (div > 0)
 	{
-		newchr = f(i, s[i]);
-		newstr[i] = newchr;
-		i++;
+		digit = (nb / div) + '0';
+		write(1, &digit, 1);
+		nb %= div;
+		div /= 10;
+		(*count)++;
 	}
-	newstr[i] = '\0';
-	return (newstr);
 }

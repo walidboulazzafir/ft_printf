@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/21 08:46:53 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/07 10:38:36 by wboulazz         ###   ########.fr       */
+/*   Created: 2026/11/14 08:37:43 by wboulazz          #+#    #+#             */
+/*   Updated: 2026/11/14 08:59:24 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+void	ft_print_pointer(va_list args, int *count)
 {
-	unsigned int	i;
+	void		*p;
+	uintptr_t	nb;
 
-	if (!s || !f)
-		return ;
-	i = 0;
-	while (s[i])
+	p = va_arg(args, void *);
+	if (!p)
 	{
-		f(i, &s[i]);
-		i++;
+		write(1, "(nil)", 5);
+		(*count) += 5;
+		return ;
 	}
+	write(1, "0x", 2);
+	(*count) += 2;
+	nb = (uintptr_t)p;
+	print_hex_digits(nb, "0123456789abcdef", count);
 }
