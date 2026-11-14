@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 08:37:43 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/14 09:15:27 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/14 09:21:06 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_pointer(va_list args, int *count)
 {
-	void		*p;
+	void			*p;
 	unsigned long	nb;
 
 	p = va_arg(args, void *);
