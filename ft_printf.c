@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 21:49:06 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/14 08:59:31 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/20 17:37:50 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,43 @@ void	handle_formate(va_list args, char format, int *count)
 		ft_print_pointer(args, count);
 }
 
-int	ft_printf(const char *format, ...)
+static int	process_format(const char *format, va_list args, int *count)
 {
-	va_list	args;
-	int		count;
-	int		i;
+	int	i;
 
-	if (!format)
-		return (-1);
-	va_start(args, format);
-	count = 0;
 	i = 0;
 	while (format[i])
 	{
+		if (format[i] == '%' && !format[i + 1])
+			return (-1);
 		if (format[i] == '%' && format[i + 1])
 		{
-			handle_formate(args, format[i + 1], &count);
+			handle_formate(args, format[i + 1], count);
 			i += 2;
 		}
 		else
 		{
 			write(1, &format[i], 1);
 			i++;
-			count++;
+			(*count)++;
 		}
+	}
+	return (0);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		count;
+
+	if (!format)
+		return (-1);
+	count = 0;
+	va_start(args, format);
+	if (process_format(format, args, &count) == -1)
+	{
+		va_end(args);
+		return (-1);
 	}
 	va_end(args);
 	return (count);

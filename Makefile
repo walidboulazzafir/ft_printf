@@ -1,4 +1,3 @@
-
 NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -30,3 +29,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+.SECONDARY : $(OBJS)
