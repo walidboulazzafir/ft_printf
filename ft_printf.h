@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:39:38 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/21 12:26:31 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/21 18:03:01 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
+# include <stddef.h>
 # include <unistd.h>
 
 int		ft_printf(const char *format, ...);
+int		ft_put_count(char c, int *count);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(const char *s, int fd);
 size_t	ft_strlen(const char *s);
+void	handle_formate(va_list args, char format, int *count);
 void	ft_print_char(va_list args, int *count, char format);
 void	ft_print_str(va_list args, int *count);
 void	ft_print_nbr(va_list args, int *count);

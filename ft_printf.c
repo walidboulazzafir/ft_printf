@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 21:49:06 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/21 13:58:34 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/21 18:02:29 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ void	handle_formate(va_list args, char format, int *count)
 		ft_print_hex(args, count, format);
 	else if (format == 'p')
 		ft_print_pointer(args, count);
+	else
+	{
+		if (write(1, "%", 1) == -1
+			|| write(1, &format, 1) == -1)
+			*count = -1;
+		else
+			(*count) += 2;
+	}
 }
 
 static int	process_format(const char *format, va_list args, int *count)
@@ -40,11 +48,14 @@ static int	process_format(const char *format, va_list args, int *count)
 		if (format[i] == '%' && format[i + 1])
 		{
 			handle_formate(args, format[i + 1], count);
+			if (*count == -1)
+				return (-1);
 			i += 2;
 		}
 		else
 		{
-			write(1, &format[i], 1);
+			if (write(1, &format[i], 1) == -1)
+				return (-1);
 			i++;
 			(*count)++;
 		}
@@ -56,16 +67,15 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		count;
+	int		ret;
 
-	if (!format || write(1, "", 1) == -1)
+	if (!format)
 		return (-1);
 	count = 0;
 	va_start(args, format);
-	if (process_format(format, args, &count) == -1)
-	{
-		va_end(args);
-		return (-1);
-	}
+	ret = process_format(format, args, &count);
 	va_end(args);
+	if (ret == -1)
+		return (-1);
 	return (count);
 }

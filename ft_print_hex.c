@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 07:31:54 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/21 13:48:52 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/21 17:55:31 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ void	print_hex_digits(size_t nb, char *hex, int *count)
 	while (div > 0)
 	{
 		nbr = nb / div;
-		write(1, &hex[nbr], 1);
+		if (write(1, &hex[nbr], 1) == -1)
+		{
+			*count = -1;
+			return ;
+		}
 		nb %= div;
 		div /= 16;
 		(*count)++;

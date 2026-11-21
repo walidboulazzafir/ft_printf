@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 06:53:57 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/14 08:59:27 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/21 17:57:37 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_print_str(va_list args, int *count)
 	i = 0;
 	while (content[i])
 	{
-		write(1, &content[i], 1);
+		if (ft_put_count(content[i], count) == -1)
+			return ;
 		i++;
 	}
-	(*count) += i;
 }

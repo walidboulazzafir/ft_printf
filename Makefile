@@ -1,6 +1,8 @@
 NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+AR = ar
+ARFLAGS = rcs
 
 SRCS = ft_printf.c \
        ft_print_pointer.c \
@@ -8,20 +10,20 @@ SRCS = ft_printf.c \
        ft_print_hex.c \
        ft_print_str.c \
        ft_print_unsigned.c \
-       ft_print_nbr.c
+       ft_print_nbr.c \
 
 OBJS = $(SRCS:.c=.o)
 
-%.o: %.c
+%.o: %.c 
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJS) 
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
@@ -29,4 +31,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-.SECONDARY : $(OBJS)
