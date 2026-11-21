@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 21:49:06 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/20 17:37:50 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/21 13:58:34 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		count;
 
-	if (!format)
+	if (!format || write(1, "", 1) == -1)
 		return (-1);
 	count = 0;
 	va_start(args, format);

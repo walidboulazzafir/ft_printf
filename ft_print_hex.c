@@ -6,16 +6,16 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 07:31:54 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/14 09:15:18 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/21 13:48:52 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_hex_digits(unsigned long nb, char *hex, int *count)
+void	print_hex_digits(size_t nb, char *hex, int *count)
 {
-	unsigned long	div;
-	unsigned long	nbr;
+	size_t	div;
+	size_t	nbr;
 
 	div = 1;
 	while (nb / div >= 16)

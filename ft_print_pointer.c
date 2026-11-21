@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 08:37:43 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/14 09:21:06 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/21 12:26:48 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_print_pointer(va_list args, int *count)
 {
-	void			*p;
-	unsigned long	nb;
+	void	*p;
+	size_t	nb;
 
 	p = va_arg(args, void *);
 	if (!p)
@@ -26,6 +26,6 @@ void	ft_print_pointer(va_list args, int *count)
 	}
 	write(1, "0x", 2);
 	(*count) += 2;
-	nb = (unsigned long)p;
+	nb = (size_t)p;
 	print_hex_digits(nb, "0123456789abcdef", count);
 }
