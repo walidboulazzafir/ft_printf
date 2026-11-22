@@ -6,7 +6,7 @@
 /*   By: wboulazz <wboulazz@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 21:49:06 by wboulazz          #+#    #+#             */
-/*   Updated: 2026/11/21 18:02:29 by wboulazz         ###   ########.fr       */
+/*   Updated: 2026/11/22 10:14:04 by wboulazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ void	handle_formate(va_list args, char format, int *count)
 		ft_print_hex(args, count, format);
 	else if (format == 'p')
 		ft_print_pointer(args, count);
-	else
-	{
-		if (write(1, "%", 1) == -1
-			|| write(1, &format, 1) == -1)
-			*count = -1;
-		else
-			(*count) += 2;
-	}
 }
 
 static int	process_format(const char *format, va_list args, int *count)
